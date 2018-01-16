@@ -5,3 +5,4 @@
 require("./build.js");
 require("./lint.js");
 require("./package.js");
+require("./clean.js");

@@ -2,8 +2,9 @@ var gulp    = require("gulp");
 var webpack = require("webpack");
 var gutil = require("gulp-util");
 var path = require("path");
+var html_webpack_plugin = require("html-webpack-plugin");
 
-gulp.task("package", ["build"], (done) => {
+gulp.task("package", ["build", "clean:public"], (done) => {
      
     
     //https://webpack.js.org/configuration/?_sm_au_=iVVJQ3P3MBtqrMFl
@@ -12,7 +13,7 @@ gulp.task("package", ["build"], (done) => {
         entry: "./dist/index.js",
         output : {
             path: path.join(__dirname, "../dist"),
-            filename: "../public/bundle.js",
+            filename: "../public/bundle[hash].js",
             libraryTarget:"umd",
             library:"$playground"
         },
@@ -20,6 +21,12 @@ gulp.task("package", ["build"], (done) => {
             extensions: ['.js']
         },
         plugins :[
+            new html_webpack_plugin({
+                // https://github.com/jantimon/html-webpack-plugin
+                template:"./src/index.html",
+                filename:"../public/index.html",
+                inject:false,
+            })
         ],
         module: {
         }
@@ -36,3 +43,16 @@ gulp.task("package", ["build"], (done) => {
     })
 
 });
+//"webpack"
+// var replace = require("gulp-replace");
+// gulp.task("copyhtml", [], (done) => {
+//     gulp.src('./src/*.html')
+//         .pipe(replace(/bundle.js/g, './bundle.js'))
+//         .pipe(gulp.dest("./public"));
+//     done();
+// });
+
+
+// gulp.task("package", ["copyhtml"], (done) => {
+//     done();
+// });

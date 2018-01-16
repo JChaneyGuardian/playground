@@ -4,9 +4,9 @@ Different  "playing around" types of projects that I wanted to be able to start 
 ## Installed libraries
 ```
 typescript
-gulp gulp-typescript
+gulp gulp-typescript del
 tslint
-webpack
+webpack html-webpack-plugin
 ```
 
 Use `npm install` to reload node-modules currently defined in package.json
