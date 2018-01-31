@@ -1,3 +1,4 @@
+import {debug} from "./debug";
 
 export interface MergeTemplateAndDataOptions {
     openBracket? : string;
@@ -25,14 +26,16 @@ export class MergeTemplateAndData {
     public Merge = (template : string, data : any) : string => {
         let workingString = template;
         let startPos = workingString.indexOf(this.openBracket);
+        debug(`startPos=${startPos}`)
         while (startPos > -1) {
             let endPos = workingString.indexOf(this.closeBracket, startPos);
+            debug(`endPos=${endPos}`)
             if (endPos > -1) {
                 let value = this.extractValue(workingString, data, startPos, endPos);            
                 value = workingString.substr(0, startPos) + value;
                 if (!this.recursive) 
                     startPos = value.length;
-                workingString = value +  workingString.substr(endPos);
+                workingString = value +  workingString.substr(endPos+1);
             }
             else {
                 //workingString = workingString.substr(0, startPos);
@@ -45,7 +48,8 @@ export class MergeTemplateAndData {
     }
 
     private extractValue(workingString : string, data : any, startPos : number, endPos : number) {
-        let fieldName = workingString.substring(startPos, endPos);
+        let fieldName = workingString.substring(startPos+1, endPos);
+        debug(`fieldName='${fieldName}'`);
         let format = "";
 
         let p = fieldName.indexOf(this.formatDelimiter);

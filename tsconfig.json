@@ -2,7 +2,7 @@
     "compilerOptions": {
       "module": "commonjs",
       "target": "es6",
-      "lib": [ "es6", "dom" ],
+      "lib": [ "es6", "dom" , "esnext"],
       "moduleResolution": "node",
       "rootDir": "./",
       "sourceMap": true,
@@ -16,6 +16,9 @@
       "suppressImplicitAnyIndexErrors": true,
       "forceConsistentCasingInFileNames": true
     },
-    "exclude": [ "node_modules", "build", "webpack" ],
-    "types": [ "typePatches" ]
+    "exclude": [ "node_modules/**", "build", "webpack" ],
+    "types": [ "typePatches" ],
+    "include":[
+      "src/**/*.ts"
+    ]
   }

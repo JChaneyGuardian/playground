@@ -7,3 +7,6 @@ dist
 
 # Serverless directories
 .serverless
+bin
+
+GetKey.js

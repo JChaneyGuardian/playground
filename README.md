@@ -4,6 +4,9 @@ Different  "playing around" types of projects that I wanted to be able to start 
 ## Current
 This branch will be used for developing Lambda functions for AWS
 
+Specifically I'm trying to use the serverless utility to deploy the code.  I was having some weird issues with
+packaging so I switched back to gulp for building and zipping (packaging) but then used serverless to deploy.
+
 ## Tutorial
 https://blog.shovonhasan.com/deploying-a-typescript-node-aws-lambda-function-with-serverless/
 NOTE: Source has been moved to ./src and you can use the "gulp build" command to compile
@@ -31,7 +34,8 @@ serverless deploy
 ## Dev-Dependencies
 typescript tslint
 gulp gulp-typescript gulp-tslint
-serverless-offline ?serverless-plugin-typescript
+serverless-offline serverless-gulp
+?serverless-plugin-typescript
 NOTE: I'm not sure about serverless-plugin-typescript yet.  I think if that may be needed for serverless to compile the typescript before deployment
 
 ## Dependencies

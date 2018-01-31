@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: mergetemplateanddata #hello #aws-nodejs # NOTE: update this with your service name
+service: utility #hello #aws-nodejs # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -46,21 +46,19 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-package:
-  exclude:
-    - node_modules/**/*
-  include:
-    - handlers.ts
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
+#package:
 #  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
+#    - node_modules/**/*
+#    - ./**/*
+#  include:
+#    - ./dist/**
+
+package:
+  artifact: bin/package.zip
 
 functions:
-  hello:
-    handler: dist/handler.MergeTemplateAndDataAPI
+  MergeTemplateAndData:
+    handler: handler.MergeTemplateAndDataAPI
     events:
       - http:
           path: mergetemplateanddata

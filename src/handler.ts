@@ -1,5 +1,6 @@
 import { Handler, Context, Callback } from 'aws-lambda';
 import { MergeTemplateAndData } from './MergeTemplateAndData';
+import { Event } from "./Event";
 
 interface MergeTemplateAndDataAPIResponse {
   success : boolean;
@@ -9,25 +10,20 @@ interface MergeTemplateAndDataAPIResponse {
 
 const MergeTemplateAndDataAPI: Handler = (event: any, context: Context, callback: Callback) => {
   const responseBody: MergeTemplateAndDataAPIResponse = {
-      success:false,
-      result: "",
-      messages : []
+      "success":false,
+      "result": "",
+      "messages" : []
    };
 
   let responseStatus = 400;
   try {
-    let body : any = {};
-    if (event.body) {
-      body = JSON.parse(event.body);
-    }
+    console.log("body:" + event.body)
+    console.log("queryString:" + event.queryStringParameters);
+    let ev = new Event(event);
 
-    let template = body.template||event.queryStringParameters.template||event.template;
-    if (!template) {
-      throw new Error("Parameter 'template' is required.")
-    }
-
-    let data = body.data||event.data||{};
-    let options = body.options||event.options||{};
+    let template = ev.getParameter("template");
+    let data = ev.getParameter("data", {});
+    let options = ev.getParameter("options", {});
 
     let mtd = new MergeTemplateAndData(options);
 
@@ -36,6 +32,7 @@ const MergeTemplateAndDataAPI: Handler = (event: any, context: Context, callback
     responseStatus = 200;
   } 
   catch (error) {
+    console.log(error);
     responseBody.messages.push(error);
   }
 
