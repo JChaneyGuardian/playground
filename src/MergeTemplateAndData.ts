@@ -60,10 +60,14 @@ export class MergeTemplateAndData {
             debug(`fieldName='${fieldName}'    format='${format}'`);
         }
 
+        debug(`"data='${JSON.stringify(data)}'`)
         let value = data[fieldName];
+        debug(`"value='${value}'`)
         if (format) {
             if (format.substr(0,4).toLowerCase() === 'link') {
-                value = `<a href="{data[format.substr(5)]}">{value}</a>`;
+                let link = data[format.substr(5)];
+                debug(`"link='${link}'`)
+                value = `<a href="${link}">${value}</a>`;
             }
         }
         return value;
