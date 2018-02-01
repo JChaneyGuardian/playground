@@ -17,6 +17,7 @@ const MergeTemplateAndDataAPI: Handler = (event: any, context: Context, callback
 
   let responseStatus = 400;
   try {
+    console.log("v1.0");
     console.log("body:" + event.body)
     console.log("queryString:" + event.queryStringParameters);
     let ev = new Event(event);
@@ -38,7 +39,10 @@ const MergeTemplateAndDataAPI: Handler = (event: any, context: Context, callback
 
   callback(undefined, {
     "statusCode": responseStatus,
-        "headers": {},
+        "headers": {
+          "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+          "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS},
+        },
         "body": JSON.stringify(responseBody),
         "isBase64Encoded": false
   });

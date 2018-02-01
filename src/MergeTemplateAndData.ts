@@ -31,7 +31,8 @@ export class MergeTemplateAndData {
             let endPos = workingString.indexOf(this.closeBracket, startPos);
             debug(`endPos=${endPos}`)
             if (endPos > -1) {
-                let value = this.extractValue(workingString, data, startPos, endPos);            
+                let value = this.extractValue(workingString, data, startPos, endPos); 
+                debug(`value='${value}'`)           
                 value = workingString.substr(0, startPos) + value;
                 if (!this.recursive) 
                     startPos = value.length;
@@ -56,11 +57,12 @@ export class MergeTemplateAndData {
         if (p > -1) {
             format = fieldName.substr(p+this.formatDelimiter.length);
             fieldName = fieldName.substr(0, p);
+            debug(`fieldName='${fieldName}'    format='${format}'`);
         }
 
         let value = data[fieldName];
         if (format) {
-            if (format.toLowerCase() === 'link') {
+            if (format.substr(0,4).toLowerCase() === 'link') {
                 value = `<a href="{data[format.substr(5)]}">{value}</a>`;
             }
         }

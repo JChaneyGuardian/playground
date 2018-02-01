@@ -46,15 +46,15 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
-#  exclude:
-#    - node_modules/**/*
-#    - ./**/*
-#  include:
-#    - ./dist/**
-
 package:
-  artifact: bin/package.zip
+  exclude:
+#    - node_modules/**/*
+    - ./*
+  include:
+    - ./dist/**
+
+#package:
+#  artifact: bin/package.zip
 
 functions:
   MergeTemplateAndData:
@@ -63,7 +63,8 @@ functions:
       - http:
           path: mergetemplateanddata
           method: post
-
+          cors: true
+          authorizer: aws_iam
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

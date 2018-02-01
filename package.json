@@ -8,6 +8,7 @@
     "@types/aws-lambda": "0.0.29",
     "@types/node": "^9.3.0",
     "del": "^3.0.0",
+    "gulp-rename": "^1.2.2",
     "gulp-zip": "^4.1.0",
     "serverless-gulp": "^1.0.10",
     "serverless-offline": "^3.16.0",
